@@ -1,11 +1,4 @@
-import {
-  BellIcon,
-  CreditCardIcon,
-  LogOutIcon,
-  MoreVerticalIcon,
-  Settings,
-  UserCircleIcon,
-} from "lucide-react";
+import { BellIcon, LogOutIcon, Settings, UserCircleIcon } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -17,13 +10,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
-} from "@/components/ui/sidebar";
+import { SidebarMenuButton, useSidebar } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 export default function NavUser({
   user,
@@ -41,7 +30,7 @@ export default function NavUser({
       <DropdownMenuTrigger asChild>
         <SidebarMenuButton
           size="lg"
-          className="data-[state=open]:bg-primary data-[state=open]:text-sidebar-primary-foreground hover:bg-primary hover:text-primary-foreground"
+          className="data-[state=open]:bg-sky-800 data-[state=open]:text-sidebar-primary-foreground hover:bg-sky-800 hover:text-primary-foreground border"
         >
           <Avatar className="h-8 w-8 rounded-lg">
             <AvatarImage src={user.avatar} alt={user.name} />
@@ -92,7 +81,7 @@ export default function NavUser({
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild className="w-full">
-          <Link href="/logout">
+          <Link href="/logout" className="w-full">
             <LogOutIcon />
             Log out
           </Link>

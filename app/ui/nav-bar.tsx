@@ -163,7 +163,7 @@ export default function MyNavBar() {
   };
 
   return (
-    <div style={{ backgroundColor: "#1567da" }}>
+    <div className="bg-sky-600">
       <header className="relative">
         <nav aria-label="Top" className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="border-gray-200">

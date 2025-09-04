@@ -94,19 +94,21 @@ export default function Page() {
                 className="h-7 text-xs px-2 py-1 w-48"
               />
             </div>
-            <div className="flex md:justify-end sm:m-10 mb-2">
-              {rows.length < maxRows && (
-                <span
-                  className="h-7 w-7 flex items-center justify-center"
-                  onClick={handleAddRow}
-                  title="Add another row"
-                >
-                  <PlusCircleIcon className="size-7 fill" />
-                </span>
-              )}
+            <div className="flex md:justify-center mb-2">
+              <div className="flex md:w-2/4 md:justify-end sm:w-full">
+                {rows.length < maxRows && (
+                  <span
+                    className="h-7 w-7 flex items-center justify-center"
+                    onClick={handleAddRow}
+                    title="Add another row"
+                  >
+                    <PlusCircleIcon className="size-7 fill" />
+                  </span>
+                )}
+              </div>
             </div>
             <div className="flex md:justify-center mb-10">
-              <div className="md:w-2/3 sm:w-full">
+              <div className="md:w-2/4 sm:w-full">
                 <table className="min-w-full text-xs mx-auto">
                   <thead>
                     <tr className="bg-gray-100">
@@ -134,7 +136,7 @@ export default function Page() {
                               handleInputChange(idx, e.target.value)
                             }
                             required
-                            className="h-7 text-xs px-2 py-1"
+                            className="h-7 text-xs px-2 py-1 uppercase"
                           />
                         </td>
                         <td className="px-2 py-1 border text-center">
@@ -157,11 +159,14 @@ export default function Page() {
           </CardContent>
           <CardFooter className="flex flex-col justify-center overflow-auto">
             <div className="flex flex-row justify-between items-center gap-4">
-              <Button className="flex-1 bg-blue-500" type="submit">
+              <Button
+                className="flex-1 bg-sky-500 hover:bg-sky-700"
+                type="submit"
+              >
                 Submit
               </Button>
               <Button
-                className="flex-1 bg-blue-500"
+                className="flex-1 bg-sky-500 hover:bg-sky-700"
                 onClick={() => window.location.reload()}
               >
                 Cancel
