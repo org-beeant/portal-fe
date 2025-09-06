@@ -60,8 +60,8 @@ export default function Page() {
       try {
         const result = await fetchHistoricalData();
         //setData(result.data);
-        setHistoryData(result.data);
-        setTotalRows(result.totalRows);
+        setHistoryData(result?.data);
+        setTotalRows(result?.totalRows);
       } catch (e) {
         //setData(null);
         setHistoryData([]);

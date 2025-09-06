@@ -14,8 +14,10 @@ import { PlusCircleIcon, Trash2Icon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { historyColumns } from "@/lib/columns";
-import { fetchHistoricalData } from "@/lib/data";
+import { fetchHistoricalData, postBulkIncomeData } from "@/lib/data";
 import { History } from "@/lib/definitions";
+import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 
 export default function Page() {
   // State for dynamic rows
@@ -34,9 +36,15 @@ export default function Page() {
       setLoading(true);
       try {
         const result = await fetchHistoricalData();
-        setData(result.data);
-        setHistoryData(result.data);
-        setTotalRows(result.totalRows);
+        if (result) {
+          setData(result.data);
+          setHistoryData(result.data);
+          setTotalRows(result.totalRows);
+        } else {
+          setData(null);
+          setHistoryData([]);
+          setTotalRows(0);
+        }
       } catch (e) {
         setData(null);
         setHistoryData([]);
@@ -69,10 +77,46 @@ export default function Page() {
     setRows(updated);
   };
 
+  const formSubmitted = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.target as HTMLFormElement);
+    // Process formData as needed
+    // For demonstration, just logging the values
+    let panlist: any = [];
+    rows.forEach((_, idx) => {
+      panlist.push(formData.get(`pan-${idx}`));
+    });
+
+    try {
+      const response = await postBulkIncomeData(
+        formData.get("ref") as string,
+        panlist
+      );
+
+      if (response.result.status) {
+        toast("Bulk PAN request submitted successfully!", {
+          description: "You will be notified once processing is complete.",
+          duration: 5000,
+        });
+      } else {
+        toast("Error", {
+          description: response.result.message || "An error occurred.",
+          duration: 5000,
+        });
+      }
+    } catch (error) {
+      toast("Error", {
+        description: "An error occurred while submitting the request.",
+        duration: 5000,
+      });
+    }
+    // You can add your submission logic here (e.g., API call)
+  };
+
   return (
     <div className="grid gap-y-4 p-4 sm:grid-cols-1 md:grid-cols-1">
       <Card className="flex-1 h-auto">
-        <form method="post">
+        <form method="post" onSubmit={formSubmitted}>
           <CardHeader>
             <CardTitle>Bulk PAN Validation</CardTitle>
             <CardDescription className="truncate">

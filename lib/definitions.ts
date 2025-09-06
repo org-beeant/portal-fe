@@ -35,12 +35,20 @@ export interface RCResultInterface {
 }
 
 export type History = {
-  "SL #": string;
-  "Validated Date": string;
-  "Vehicle RC number": string;
-  "Chassis Number": string;
-  Owner: string;
-  "Registered at": string;
-  Status: string;
-  Remarks: string | null;
+  id: string;
+  client_ref_id: string;
+  request_id: string;
+  current_statistics: {
+    open: number;
+    error: number;
+    total: number;
+    failure: number;
+    completed: number;
+    inprogress: number;
+  };
+  batch_request_status: string;
+  created_on: Date;
+  updated_on: Date;
+  number_of_pan: number | null;
+  error_message: string | null;
 };

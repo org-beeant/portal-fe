@@ -1,76 +1,51 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import clsx from "clsx";
-import { Download, MoreHorizontal, Trash2 } from "lucide-react";
-import { Button } from "~/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
 import { History } from "./definitions";
-import { Badge } from "~/components/ui/badge";
 
 export const historyColumns: ColumnDef<History>[] = [
   {
-    accessorKey: "SL #",
-    header: "SL #",
+    accessorKey: "client_ref_id",
+    header: "Ref #",
     cell: ({ row }) => (
-      <div className="capitalize text-xs">{row.getValue("SL #")}</div>
+      <div className="capitalize text-xs">{row.getValue("client_ref_id")}</div>
     ),
   },
   {
-    accessorKey: "Validated Date",
-    header: "Date",
+    accessorKey: "created_on",
+    header: "Created On",
     cell: ({ row }) => (
-      <div className="capitalize text-xs">{row.getValue("Validated Date")}</div>
+      <div className="capitalize text-xs">{row.getValue("created_on")}</div>
     ),
   },
   {
-    accessorKey: "Vehicle RC number",
-    header: "Vehicle RC number",
+    accessorKey: "number_of_pan",
+    header: "Number of PANs",
+    cell: ({ row }) => (
+      <div className="capitalize text-xs">{row.getValue("number_of_pan")}</div>
+    ),
+  },
+  {
+    accessorKey: "batch_request_status",
+    header: "Batch Request Status",
     cell: ({ row }) => (
       <div className="capitalize text-xs">
-        {row.getValue("Vehicle RC number")}
+        {row.getValue("batch_request_status")}
       </div>
     ),
   },
   {
-    accessorKey: "Chassis Number",
-    header: "Chassis Number",
+    accessorKey: "updated_on",
+    header: "Updated On",
     cell: ({ row }) => (
-      <div className="capitalize text-xs">{row.getValue("Chassis Number")}</div>
+      <div className="capitalize text-xs">{row.getValue("updated_on")}</div>
     ),
   },
   {
-    accessorKey: "Owner",
-    header: "Owner",
+    accessorKey: "error_message",
+    header: "Error Message",
     cell: ({ row }) => (
-      <div className="capitalize text-xs">{row.getValue("Owner")}</div>
-    ),
-  },
-  {
-    accessorKey: "Registered at",
-    header: "Registered at",
-    cell: ({ row }) => (
-      <div className="capitalize text-xs">{row.getValue("Registered at")}</div>
-    ),
-  },
-  {
-    accessorKey: "Status",
-    header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize text-xs">{row.getValue("Status")}</div>
-    ),
-  },
-  {
-    accessorKey: "Remarks",
-    header: "Remarks",
-    cell: ({ row }) => (
-      <div className="capitalize text-xs">{row.getValue("Remarks")}</div>
+      <div className="capitalize text-xs">{row.getValue("error_message")}</div>
     ),
   },
   /* {

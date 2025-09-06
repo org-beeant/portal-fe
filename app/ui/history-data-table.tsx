@@ -88,7 +88,7 @@ export function DataTableHistory<TData>({
     setPage(myPage);
     const fetchHistory = async () => {
       const fetchHistory = await fetchHistoricalData(myPage, size);
-      setHistoryData(fetchHistory.data as TData[]);
+      setHistoryData(fetchHistory?.data as TData[]);
     };
 
     fetchHistory();

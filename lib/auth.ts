@@ -1,9 +1,10 @@
-import NextAuth, { type DefaultSession } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "axios";
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 const LOGIN_URL =
-  (process.env.BACKEND_URL || "") + (process.env.LOGIN_URL || "");
+  (process.env.NEXT_PUBLIC_BACKEND_URL || "") +
+  (process.env.NEXT_PUBLIC_LOGIN_URL || "");
 
 declare module "next-auth" {
   interface User {
@@ -33,7 +34,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         bodydata.append("username", process.env.DEMO_USERNAME || "");
         bodydata.append("password", process.env.DEMO_PASSWORD || "");
 
-        console.log("Body Data ::: ", bodydata.toString());
+        //console.log("Body Data ::: ", bodydata.toString());
         try {
           const res = await axios.post(LOGIN_URL, bodydata, {
             headers: {
